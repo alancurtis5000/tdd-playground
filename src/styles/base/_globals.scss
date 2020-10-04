@@ -14,3 +14,7 @@ html {
   outline: $c-3 solid 2px;
   z-index: 1;
 }
+
+.page {
+  min-height: calc(100vh - 120px);
+}

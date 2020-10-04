@@ -1,19 +1,19 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 
-import AHeader from '../components/AHeader/AHeader';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Sidebar from '../components/Sidebar';
 
-import APage01 from '../pages/APage01/APage01';
-import NotFound from '../pages/NotFound/NotFound';
-import Landing from '../pages/Landing/Landing';
-import StyleGuide from '../pages/StyleGuide/StyleGuide';
-import CounterRedux from '../pages/CounterRedux/CounterRedux';
+import APage01 from '../pages/APage01';
+import NotFound from '../pages/NotFound';
+import Landing from '../pages/Landing';
+import StyleGuide from '../pages/StyleGuide';
 
 const Routes = withRouter(({ location }) => {
   return (
     <Switch location={location}>
-      <Route path="/" exact component={CounterRedux} />
-      <Route path="/CounterRedux" exact component={CounterRedux} />
+      <Route path="/" exact component={Landing} />
       <Route path="/StyleGuide" component={StyleGuide} />
       <Route path="/Landing" component={Landing} />
       <Route path="/APage01" component={APage01} />
@@ -25,8 +25,12 @@ const Routes = withRouter(({ location }) => {
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <AHeader />
-      <Routes />
+      <Header />
+      <Sidebar />
+      <Footer />
+      <div className="content">
+        <Routes />
+      </div>
     </BrowserRouter>
   );
 };
