@@ -7,11 +7,13 @@ import APage01 from '../pages/APage01/APage01';
 import NotFound from '../pages/NotFound/NotFound';
 import Landing from '../pages/Landing/Landing';
 import StyleGuide from '../pages/StyleGuide/StyleGuide';
+import CounterRedux from '../pages/CounterRedux/CounterRedux';
 
 const Routes = withRouter(({ location }) => {
   return (
     <Switch location={location}>
-      <Route path="/" exact component={APage01} />
+      <Route path="/" exact component={CounterRedux} />
+      <Route path="/CounterRedux" exact component={CounterRedux} />
       <Route path="/StyleGuide" component={StyleGuide} />
       <Route path="/Landing" component={Landing} />
       <Route path="/APage01" component={APage01} />

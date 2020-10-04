@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, fireEvent, cleanup } from '@testing-library/react';
+import CounterRedux from './CounterRedux';
 
 describe('CounterRedux', () => {
   afterEach(cleanup);
@@ -7,11 +8,10 @@ describe('CounterRedux', () => {
   test('placeholder test', () => {
     expect(true).toEqual(true);
   });
+
   it('should render page', () => {
-    // const { getByTestId } = render(
-    //     <ACounter />
-    // );
-    // expect(getByTestId('count')).toHaveTextContent('3');
-    expect(true).toEqual(false);
+    const { getByText } = render(<CounterRedux />);
+    const pageTitle = getByText(/CounterRedux/i);
+    expect(pageTitle).toBeInTheDocument();
   });
 });
