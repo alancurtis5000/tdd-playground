@@ -1,24 +1,41 @@
 import React from 'react';
 import { render, fireEvent, cleanup } from '@testing-library/react';
 import Counter from '../../components/Counter';
-import { iteratee } from 'lodash';
 
 describe('Counter', () => {
   afterEach(cleanup);
 
-  it('can render', () => {
-    expect(true).toEqual(false);
+  it('can render default state', () => {
+    const { getByTestId } = render(<Counter />);
+    const countValue = getByTestId('count').textContent;
+    expect(countValue).toEqual('0');
   });
 
   it('can increment', () => {
-    expect(true).toEqual(false);
+    const { getByTestId, getByText } = render(<Counter />);
+    fireEvent.click(getByText('+'));
+    const countValue = getByTestId('count').textContent;
+    expect(countValue).toEqual('1');
   });
 
   it('can decrement', () => {
-    expect(true).toEqual(false);
+    const { getByTestId, getByText } = render(<Counter />);
+    fireEvent.click(getByText('-'));
+    const countValue = getByTestId('count').textContent;
+    expect(countValue).toEqual('-1');
   });
 
   it('can reset to 0', () => {
-    expect(true).toEqual(false);
+    const { getByTestId, getByText } = render(<Counter />);
+    fireEvent.click(getByText('Reset'));
+    const countValue = getByTestId('count').textContent;
+    expect(countValue).toEqual('0');
+  });
+
+  it('can reset to 0 with overide state', () => {
+    const { getByTestId, getByText } = render(<Counter />);
+    fireEvent.click(getByText('Reset'));
+    const countValue = getByTestId('count').textContent;
+    expect(countValue).toEqual('9');
   });
 });
