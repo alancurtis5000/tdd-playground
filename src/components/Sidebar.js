@@ -9,6 +9,7 @@ const Sidebar = () => {
       <Link to="/Landing">Landing</Link>
       <Link to="/StyleGuide">StyleGuild</Link>
       <Link to="/NotFound">NotFound</Link>
+      <Link to="/CounterPage">CounterPage</Link>
     </div>
   );
 };
