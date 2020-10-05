@@ -9,7 +9,22 @@ const Fetch01 = () => {
 
   useEffect(() => {
     let mounted = true;
+    let delayLoadingMessage;
+
+    function delaySetIsPending() {
+      delayLoadingMessage = setTimeout(() => {
+        if (mounted) {
+          setIsPending(true);
+        }
+      }, 1000);
+    }
+
+    function cancelDelaySetIsPending() {
+      clearTimeout(delayLoadingMessage);
+    }
+
     if (getQuote) {
+      delaySetIsPending();
       const loadData = async () => {
         try {
           const response = await axios.get('/api/test');
@@ -18,12 +33,14 @@ const Fetch01 = () => {
             setQuote(response.data);
             setGetQuote(false);
             setIsPending(false);
+            cancelDelaySetIsPending();
           }
         } catch (err) {
           console.log(err.message);
           setError(err.message);
           setGetQuote(false);
           setIsPending(false);
+          cancelDelaySetIsPending();
         }
       };
       loadData();
@@ -43,7 +60,6 @@ const Fetch01 = () => {
   };
 
   const handleGet = () => {
-    setIsPending(true);
     setGetQuote(true);
   };
 
