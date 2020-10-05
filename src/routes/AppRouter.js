@@ -10,11 +10,13 @@ import NotFound from '../pages/NotFound';
 import Landing from '../pages/Landing';
 import StyleGuide from '../pages/StyleGuide';
 import CounterPage from '../pages/CounterPage';
+import FetchPage from '../pages/FetchPage';
 
 const Routes = withRouter(({ location }) => {
   return (
     <Switch location={location}>
-      <Route path="/" exact component={CounterPage} />
+      <Route path="/" exact component={FetchPage} />
+      <Route path="/FetchPage" component={FetchPage} />
       <Route path="/CounterPage" component={CounterPage} />
       <Route path="/StyleGuide" component={StyleGuide} />
       <Route path="/Landing" component={Landing} />

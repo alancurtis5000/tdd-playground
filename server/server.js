@@ -10,7 +10,9 @@ app.use(bodyParser.json());
 // Endpoints
 app.get('/api/test', (req, res) => {
   console.log('hit server');
-  res.status(200).send('hello');
+  setTimeout(() => {
+    res.status(200).send('hello');
+  }, 2000);
 });
 
 // Launch Server
