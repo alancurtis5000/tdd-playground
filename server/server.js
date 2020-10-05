@@ -21,7 +21,7 @@ app.get('/api/test', (req, res) => {
   const result = quotes[random(0, 3)];
   setTimeout(() => {
     res.status(200).send(result);
-  }, 000);
+  }, 2000);
 });
 
 // Launch Server
