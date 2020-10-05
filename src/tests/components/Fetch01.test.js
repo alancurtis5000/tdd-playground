@@ -20,13 +20,15 @@ describe('Fetch', () => {
     expect(quote).toHaveTextContent('hello there');
   });
 
-  it('shows loading while fetching data', async () => {
-    // axiosMock.get.mockResolvedValueOnce({ data: 'hello there' });
-    // const { getByTestId, getByText } = render(<Fetch01 />);
-    // fireEvent.click(getByText('Get Quote'));
-    // const loadingMessage = await waitForElement(() => getByTestId('loading'));
-    // expect(loadingMessage).toHaveTextContent('...loading...');
-  });
+  // todo: these test cases need to pass
+
+  // it('shows loading while fetching data', async () => {
+  //   axiosMock.get.mockResolvedValueOnce({ data: 'hello there' });
+  //   const { getByTestId, getByText } = render(<Fetch01 />);
+  //   fireEvent.click(getByText('Get Quote'));
+  //   const loadingMessage = await waitForElement(() => getByTestId('loading'));
+  //   expect(loadingMessage).toHaveTextContent('...loading...');
+  // });
 
   // it('shows no data found on empty respose', async () => {
   //   expect(true).toEqual(false);
