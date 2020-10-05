@@ -33,9 +33,9 @@ describe('Counter', () => {
   });
 
   it('can reset to 0 with overide state', () => {
-    const { getByTestId, getByText } = render(<Counter />);
+    const { getByTestId, getByText } = render(<Counter initalState={44} />);
     fireEvent.click(getByText('Reset'));
     const countValue = getByTestId('count').textContent;
-    expect(countValue).toEqual('9');
+    expect(countValue).toEqual('0');
   });
 });
