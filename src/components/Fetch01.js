@@ -1,63 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// eslint-disable-next-line react-hooks/exhaustive-deps
 
 const Fetch01 = () => {
   const [isPending, setIsPending] = useState(false);
   const [quote, setQuote] = useState(' default ');
   const [error, setError] = useState('');
-  const [isMounted, setIsMounted] = useState(false);
+  const [getQuote, setGetQuote] = useState(false);
 
-  // todo: fix error when unmounting. changing props after unmount.
   useEffect(() => {
-    setIsMounted(true);
-    return () => {
-      cancelDelaySetIsPending();
-      setIsMounted(false);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const getQuote = async () => {
-    console.log('getQuote triggered');
-    if (isMounted) {
-      delaySetIsPending();
-      setQuote('...');
-      setError('');
-
-      axios
-        .get('/api/test')
-        .then((res) => {
-          if (isMounted) {
-            console.log('axios res:', res);
+    let mounted = true;
+    if (getQuote) {
+      const loadData = async () => {
+        try {
+          const response = await axios.get('/api/test');
+          if (mounted) {
+            console.log('res:', response.data);
+            setQuote(response.data);
+            setGetQuote(false);
             setIsPending(false);
-            cancelDelaySetIsPending();
-            setQuote(res.data);
           }
-        })
-        .catch((err) => {
-          if (isMounted) {
-            setIsPending(false);
-            cancelDelaySetIsPending();
-            setError(err.message);
-          }
-        });
+        } catch (err) {
+          console.log(err.message);
+          setError(err.message);
+          setGetQuote(false);
+          setIsPending(false);
+        }
+      };
+      loadData();
     }
-  };
 
-  let delayLoadingMessage;
-
-  function delaySetIsPending() {
-    delayLoadingMessage = setTimeout(() => {
-      if (isMounted) {
-        setIsPending(true);
-      }
-    }, 500);
-  }
-
-  function cancelDelaySetIsPending() {
-    clearTimeout(delayLoadingMessage);
-  }
+    return () => {
+      mounted = false;
+    };
+  }, [getQuote]);
 
   const renderLoading = () => {
     return <div>...loading...</div>;
@@ -67,9 +42,14 @@ const Fetch01 = () => {
     return <div>{error}</div>;
   };
 
+  const handleGet = () => {
+    setIsPending(true);
+    setGetQuote(true);
+  };
+
   return (
     <div className="Fetch01">
-      <button onClick={getQuote}>Get Quote</button>
+      <button onClick={handleGet}>Get Quote</button>
       <div data-testid="quote">{quote}</div>
       <div data-testid="loading">{isPending ? renderLoading() : null}</div>
       {error ? renderError() : null}
